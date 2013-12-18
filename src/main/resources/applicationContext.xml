@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<import resource="db-config.xml" />
+
+	<bean id="ageDAO" class="ca.uwaterloo.iss4e.demographics.dao.census.AgeDAO">
+		<constructor-arg ref="censusDataSource" />
+	</bean>
+
+	<bean id="coordinateDAO"
+		class="ca.uwaterloo.iss4e.demographics.dao.geography.CoordinateDAO">
+		<constructor-arg ref="censusDataSource" />
+	</bean>
+
+	<bean id="childrenAtHomeDAO"
+		class="ca.uwaterloo.iss4e.demographics.dao.census.ChildrenAtHomeDAO">
+		<constructor-arg ref="censusDataSource" />
+	</bean>
+
+	<bean id="daCensusProfileDAO"
+		class="ca.uwaterloo.iss4e.demographics.dao.census.DaCensusProfileDAO">
+		<constructor-arg ref="censusDataSource" />
+	</bean>
+
+	<bean id="disseminationAreaDAO"
+		class="ca.uwaterloo.iss4e.demographics.dao.geography.DisseminationAreaDAO">
+		<constructor-arg ref="censusDataSource" />
+	</bean>
+
+	<bean id="dwellingDAO" class="ca.uwaterloo.iss4e.demographics.dao.census.DwellingDAO">
+		<constructor-arg ref="censusDataSource" />
+	</bean>
+
+	<bean id="forwardSortationAreaDAO"
+		class="ca.uwaterloo.iss4e.demographics.dao.geography.ForwardSortationAreaDAO">
+		<constructor-arg ref="censusDataSource" />
+	</bean>
+
+	<bean id="householdIncomeDAO"
+		class="ca.uwaterloo.iss4e.demographics.dao.census.HouseholdIncomeDAO">
+		<constructor-arg ref="censusDataSource" />
+	</bean>
+
+	<bean id="householdSizeDAO"
+		class="ca.uwaterloo.iss4e.demographics.dao.census.HouseholdSizeDAO">
+		<constructor-arg ref="censusDataSource" />
+	</bean>
+
+	<bean id="householdTypeDAO"
+		class="ca.uwaterloo.iss4e.demographics.dao.census.HouseholdTypeDAO">
+		<constructor-arg ref="censusDataSource" />
+	</bean>
+
+	<bean id="labourForceActivityDAO"
+		class="ca.uwaterloo.iss4e.demographics.dao.census.LabourForceActivityDAO">
+		<constructor-arg ref="censusDataSource" />
+	</bean>
+
+	<bean id="maritalStatusDAO"
+		class="ca.uwaterloo.iss4e.demographics.dao.census.MaritalStatusDAO">
+		<constructor-arg ref="censusDataSource" />
+	</bean>
+
+	<bean id="polygonPatchDAO"
+		class="ca.uwaterloo.iss4e.demographics.dao.geography.PolygonPatchDAO">
+		<constructor-arg ref="censusDataSource" />
+	</bean>
+
+	<bean id="sizeOfFamilyDAO"
+		class="ca.uwaterloo.iss4e.demographics.dao.census.SizeOfFamilyDAO">
+		<constructor-arg ref="censusDataSource" />
+	</bean>
+
+	<bean id="structuralTypeDAO"
+		class="ca.uwaterloo.iss4e.demographics.dao.census.StructuralTypeDAO">
+		<constructor-arg ref="censusDataSource" />
+	</bean>
+
+	<bean id="workCommuteTransportationDAO"
+		class="ca.uwaterloo.iss4e.demographics.dao.census.WorkCommuteTransportationDAO">
+		<constructor-arg ref="censusDataSource" />
+	</bean>
+</beans>
