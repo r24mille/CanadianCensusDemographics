@@ -28,8 +28,8 @@ public class ForwardSortationAreaKML {
 	
 	public static void main(String[] args) {
 		Collection<ForwardSortationArea> fsas = forwardSortationAreaDAO
-				.getForwardSortationAreas(Province.ONTARIO_PROV_ID);
-		createOutlineFile(fsas, (Province.ONTARIO_PROV_ID + ".kml"));
+				.getForwardSortationAreas(Province.BC_PROV_ID);
+		createOutlineFile(fsas, (Province.BC_PROV_ID + ".kml"));
 	}
 
 	private static void createOutlineFile(Collection<ForwardSortationArea> fsas,

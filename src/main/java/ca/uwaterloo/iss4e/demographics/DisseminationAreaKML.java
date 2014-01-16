@@ -29,8 +29,8 @@ public class DisseminationAreaKML {
 	public static void main(String[] args) {
 		// Query database and append all the placemarks
 		Collection<DisseminationArea> das = disseminationAreaDAO
-				.getDisseminationAreas(Province.ONTARIO_PROV_ID);
-		createOutlineFile(das, (Province.ONTARIO_PROV_ID + ".kml"));
+				.getDisseminationAreas(Province.BC_PROV_ID);
+		createOutlineFile(das, (Province.BC_PROV_ID + ".kml"));
 	}
 
 	private static void createOutlineFile(Collection<DisseminationArea> das,
