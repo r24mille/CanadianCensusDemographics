@@ -7,10 +7,10 @@ public class ForwardSortationArea implements GeographicArea {
 	private String fsaCode;
 	private String provinceName;
 	private int provinceId;
-	private List<CensusPolygon> polygonPatches;
+	private List<CensusPolygon> censusPolygons;
 
 	public ForwardSortationArea() {
-		this.polygonPatches = new ArrayList<CensusPolygon>();
+		this.censusPolygons = new ArrayList<CensusPolygon>();
 	}
 
 	public ForwardSortationArea(String fsaCode, String provinceName,
@@ -18,11 +18,11 @@ public class ForwardSortationArea implements GeographicArea {
 		this.fsaCode = fsaCode;
 		this.provinceName = provinceName;
 		this.provinceId = provinceId;
-		this.polygonPatches = new ArrayList<CensusPolygon>();
+		this.censusPolygons = new ArrayList<CensusPolygon>();
 	}
 
 	public void addPolygon(CensusPolygon censusPolygon) {
-		this.polygonPatches.add(censusPolygon);
+		this.censusPolygons.add(censusPolygon);
 	}
 
 	public String getFsaCode() {
@@ -49,11 +49,11 @@ public class ForwardSortationArea implements GeographicArea {
 		this.provinceId = provinceId;
 	}
 
-	public List<CensusPolygon> getPolygonPatches() {
-		return polygonPatches;
+	public List<CensusPolygon> getCensusPolygons() {
+		return censusPolygons;
 	}
 
-	public void setPolygonPatches(List<CensusPolygon> polygonPatches) {
-		this.polygonPatches = polygonPatches;
+	public void setCensusPolygons(List<CensusPolygon> censusPolygons) {
+		this.censusPolygons = censusPolygons;
 	}
 }

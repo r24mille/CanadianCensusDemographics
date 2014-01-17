@@ -17,7 +17,7 @@ public class CensusSchemaUtil {
 
 	public static String getSchemaFromPk(Object pk) {
 		if (pk instanceof Integer) {
-			return CENSUS_2011_DA_SCHEMA;
+			return CENSUS_2006_DA_SCHEMA;
 		} else if (pk instanceof String) {
 			return CENSUS_2011_FSA_SCHEMA;
 		} else {

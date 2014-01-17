@@ -9,7 +9,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import ca.uwaterloo.iss4e.demographics.dao.geography.ForwardSortationAreaDAO;
-import ca.uwaterloo.iss4e.demographics.dao.geography.PolygonPatchDAO;
+import ca.uwaterloo.iss4e.demographics.dao.geography.CensusPolygonDAO;
 import ca.uwaterloo.iss4e.demographics.model.geography.CensusCoordinate;
 import ca.uwaterloo.iss4e.demographics.model.geography.CensusPolygon;
 import ca.uwaterloo.iss4e.demographics.util.BuildKML;
@@ -23,13 +23,13 @@ import de.micromata.opengis.kml.v_2_2_0.Point;
 public class DisseminationAreaContainsMeter {
 	private static final ApplicationContext context = new ClassPathXmlApplicationContext(
 			"applicationContext.xml");
-	private static final PolygonPatchDAO polygonPatchDAO = (PolygonPatchDAO) context
-			.getBean("polygonPatchDAO");
+	private static final CensusPolygonDAO censusPolygonDAO = (CensusPolygonDAO) context
+			.getBean("censusPolygonDAO");
 
 	public static void main(String[] args) {
 		int daId = 35370607;
-		List<CensusPolygon> censusPolygons = polygonPatchDAO
-				.getPolygonPatchesForFK(daId);
+		List<CensusPolygon> censusPolygons = censusPolygonDAO
+				.getCensusPolygonsForFK(daId);
 
 		CensusCoordinate meter44144 = new CensusCoordinate(-82.88681162140344,
 				42.33003713689462);

@@ -11,10 +11,10 @@ public class DisseminationArea implements GeographicArea {
 	private String provinceName;
 	private String dataQualityFlags;
 	private CensusDivisionType censusDivisionType;
-	private List<CensusPolygon> polygonPatches;
+	private List<CensusPolygon> censusPolygons;
 
 	public DisseminationArea() {
-		this.polygonPatches = new ArrayList<CensusPolygon>();
+		this.censusPolygons = new ArrayList<CensusPolygon>();
 	}
 
 	public DisseminationArea(int daId, int censusDivisionId, int provinceId,
@@ -27,11 +27,11 @@ public class DisseminationArea implements GeographicArea {
 		this.censusDivisionType = censusDivisionType;
 		this.provinceName = provinceName;
 		this.dataQualityFlags = dataQualityFlags;
-		this.polygonPatches = new ArrayList<CensusPolygon>();
+		this.censusPolygons = new ArrayList<CensusPolygon>();
 	}
 
 	public void addPolygon(CensusPolygon censusPolygon) {
-		this.polygonPatches.add(censusPolygon);
+		this.censusPolygons.add(censusPolygon);
 	}
 
 	public int getDaId() {
@@ -90,12 +90,12 @@ public class DisseminationArea implements GeographicArea {
 		this.dataQualityFlags = dataQualityFlags;
 	}
 
-	public List<CensusPolygon> getPolygonPatches() {
-		return polygonPatches;
+	public List<CensusPolygon> getCensusPolygons() {
+		return censusPolygons;
 	}
 
-	public void setPolygonPatches(List<CensusPolygon> polygonPatches) {
-		this.polygonPatches = polygonPatches;
+	public void setCensusPolygons(List<CensusPolygon> censusPolygons) {
+		this.censusPolygons = censusPolygons;
 	}
 
 }

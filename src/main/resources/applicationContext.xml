@@ -9,8 +9,13 @@
 		<constructor-arg ref="censusDataSource" />
 	</bean>
 
-	<bean id="coordinateDAO"
-		class="ca.uwaterloo.iss4e.demographics.dao.geography.CoordinateDAO">
+	<bean id="censusCoordinateDAO"
+		class="ca.uwaterloo.iss4e.demographics.dao.geography.CensusCoordinateDAO">
+		<constructor-arg ref="censusDataSource" />
+	</bean>
+	
+	<bean id="censusPolygonDAO"
+		class="ca.uwaterloo.iss4e.demographics.dao.geography.CensusPolygonDAO">
 		<constructor-arg ref="censusDataSource" />
 	</bean>
 
@@ -60,11 +65,6 @@
 
 	<bean id="maritalStatusDAO"
 		class="ca.uwaterloo.iss4e.demographics.dao.census.MaritalStatusDAO">
-		<constructor-arg ref="censusDataSource" />
-	</bean>
-
-	<bean id="polygonPatchDAO"
-		class="ca.uwaterloo.iss4e.demographics.dao.geography.PolygonPatchDAO">
 		<constructor-arg ref="censusDataSource" />
 	</bean>
 

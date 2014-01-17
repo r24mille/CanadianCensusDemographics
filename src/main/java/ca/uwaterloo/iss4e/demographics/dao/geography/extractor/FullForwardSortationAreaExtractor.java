@@ -8,9 +8,9 @@ import java.util.HashMap;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.ResultSetExtractor;
 
-import ca.uwaterloo.iss4e.demographics.dao.geography.mapper.CoordinateMapper;
+import ca.uwaterloo.iss4e.demographics.dao.geography.mapper.CensusCoordinateMapper;
 import ca.uwaterloo.iss4e.demographics.dao.geography.mapper.ForwardSortationAreaMapper;
-import ca.uwaterloo.iss4e.demographics.dao.geography.mapper.PolygonPatchMapper;
+import ca.uwaterloo.iss4e.demographics.dao.geography.mapper.CensusPolygonMapper;
 import ca.uwaterloo.iss4e.demographics.model.geography.CensusCoordinate;
 import ca.uwaterloo.iss4e.demographics.model.geography.CensusPolygon;
 import ca.uwaterloo.iss4e.demographics.model.geography.ForwardSortationArea;
@@ -34,18 +34,18 @@ public class FullForwardSortationAreaExtractor implements
 				fsaMap.put(fsa.getFsaCode(), fsa);
 			}
 
-			PolygonPatchMapper ppm = new PolygonPatchMapper();
+			CensusPolygonMapper ppm = new CensusPolygonMapper();
 			CensusPolygon cPoly = ppm.mapRow(rs, rs.getRow());
 			if (cPolyId != cPoly.getPolygonPatchId()) {
 				cPolyId = cPoly.getPolygonPatchId();
 				fsaMap.get(fsa.getFsaCode()).addPolygon(cPoly);
 			}
 
-			CoordinateMapper cm = new CoordinateMapper();
+			CensusCoordinateMapper cm = new CensusCoordinateMapper();
 			CensusCoordinate cCoord = cm.mapRow(rs, rs.getRow());
 			ForwardSortationArea tempFSA = fsaMap.get(fsa.getFsaCode());
-			int cpIndex = tempFSA.getPolygonPatches().size() - 1;
-			tempFSA.getPolygonPatches().get(cpIndex).addCoordinate(cCoord);
+			int cpIndex = tempFSA.getCensusPolygons().size() - 1;
+			tempFSA.getCensusPolygons().get(cpIndex).addCoordinate(cCoord);
 		}
 
 		return fsaMap.values();

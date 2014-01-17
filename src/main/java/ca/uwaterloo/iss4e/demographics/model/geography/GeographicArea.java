@@ -13,7 +13,7 @@ public interface GeographicArea {
 
 	public void setProvinceId(int provinceId);
 
-	public List<CensusPolygon> getPolygonPatches();
+	public List<CensusPolygon> getCensusPolygons();
 
-	public void setPolygonPatches(List<CensusPolygon> polygonPatches);
+	public void setCensusPolygons(List<CensusPolygon> censusPolygons);
 }

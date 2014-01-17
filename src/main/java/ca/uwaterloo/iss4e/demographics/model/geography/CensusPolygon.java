@@ -10,6 +10,11 @@ import com.vividsolutions.jts.geom.GeometryFactory;
 import com.vividsolutions.jts.geom.LinearRing;
 import com.vividsolutions.jts.geom.Polygon;
 
+/**
+ * Modeled very similarly to the PolygonPatch concept from GML but 
+ * named CensusPolygon so that users do not get confused when 
+ * working with opengis.geometry classes.
+ */
 public class CensusPolygon {
 	private int polygonPatchId;
 	private List<CensusCoordinate> censusCoordinates;

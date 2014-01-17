@@ -8,7 +8,7 @@ import org.springframework.jdbc.core.RowMapper;
 import ca.uwaterloo.iss4e.demographics.model.geography.CensusCoordinate;
 import ca.uwaterloo.iss4e.demographics.model.geography.PathType;
 
-public class CoordinateMapper implements RowMapper<CensusCoordinate> {
+public class CensusCoordinateMapper implements RowMapper<CensusCoordinate> {
 	public CensusCoordinate mapRow(ResultSet rs, int rowNum) throws SQLException {
 		double longitude = rs.getDouble("coordinate.longitude");
 		double latitude = rs.getDouble("coordinate.latitude");

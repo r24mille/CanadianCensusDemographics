@@ -79,7 +79,7 @@ public class DisseminationAreaKML {
 			MultiGeometry multiGeometry = new MultiGeometry();
 
 			// Add POINT elements to the MULTIGEOMETRY
-			for (CensusPolygon censusPolygon : da.getPolygonPatches()) {
+			for (CensusPolygon censusPolygon : da.getCensusPolygons()) {
 				Point point = new Point();
 				point.setId("point_" + censusPolygon.getPolygonPatchId());
 				point.setAltitudeMode(AltitudeMode.CLAMP_TO_GROUND);

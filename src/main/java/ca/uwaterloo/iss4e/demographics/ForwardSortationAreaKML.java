@@ -78,7 +78,7 @@ public class ForwardSortationAreaKML {
 			MultiGeometry multiGeometry = new MultiGeometry();
 			
 			// Add POINT elements to the MULTIGEOMETRY
-			for (CensusPolygon censusPolygon : fsa.getPolygonPatches()) {
+			for (CensusPolygon censusPolygon : fsa.getCensusPolygons()) {
 				Point point = new Point();
 				point.setId("point_" + censusPolygon.getPolygonPatchId());
 				point.setAltitudeMode(AltitudeMode.CLAMP_TO_GROUND);

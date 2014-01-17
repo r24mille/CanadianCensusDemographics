@@ -13,18 +13,18 @@ import org.springframework.jdbc.core.PreparedStatementCreator;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 
-import ca.uwaterloo.iss4e.demographics.dao.geography.extractor.PolygonPatchExtractor;
+import ca.uwaterloo.iss4e.demographics.dao.geography.extractor.CensusPolygonExtractor;
 import ca.uwaterloo.iss4e.demographics.model.geography.CensusPolygon;
 import ca.uwaterloo.iss4e.demographics.util.CensusSchemaUtil;
 
-public class PolygonPatchDAO {
+public class CensusPolygonDAO {
 	private DataSource dataSource;
 
-	public PolygonPatchDAO(DataSource dataSouce) {
+	public CensusPolygonDAO(DataSource dataSouce) {
 		this.dataSource = dataSouce;
 	}
 
-	public List<CensusPolygon> getPolygonPatchesForFK(Object fk) {
+	public List<CensusPolygon> getCensusPolygonsForFK(Object fk) {
 		String fkColumn = CensusSchemaUtil.getPkColumnName(fk);
 		String schema = CensusSchemaUtil.getSchemaFromPk(fk);
 
@@ -35,9 +35,9 @@ public class PolygonPatchDAO {
 				+ " = ? order by p.polygon_patch_id, c.coordinate_id asc";
 
 		JdbcTemplate template = new JdbcTemplate(dataSource);
-		List<CensusPolygon> polygonPatches = template.query(sql,
-				new Object[] { fk }, new PolygonPatchExtractor());
-		return polygonPatches;
+		List<CensusPolygon> censusPolygons = template.query(sql,
+				new Object[] { fk }, new CensusPolygonExtractor());
+		return censusPolygons;
 	}
 
 	/**
@@ -53,7 +53,7 @@ public class PolygonPatchDAO {
 	 * MySQL.
 	 * </p>
 	 */
-	public int insertPolygonPatch(final Object fk) {
+	public int insertCensusPolygon(final Object fk) {
 		String fkColumn = CensusSchemaUtil.getPkColumnName(fk);
 		String schema = CensusSchemaUtil.getSchemaFromPk(fk);
 

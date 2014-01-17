@@ -18,7 +18,7 @@ import ca.uwaterloo.iss4e.demographics.dao.census.StructuralTypeDAO;
 import ca.uwaterloo.iss4e.demographics.dao.geography.ForwardSortationAreaDAO;
 import ca.uwaterloo.iss4e.demographics.model.census.FsaCensusProfile;
 
-public class ForwardSortationAreaCensusImport {
+public class ForwardSortationArea2011CensusImport {
 	private static final ApplicationContext context = new ClassPathXmlApplicationContext(
 			"applicationContext.xml");
 	private static final ForwardSortationAreaDAO forwardSortationAreaDAO = (ForwardSortationAreaDAO) context

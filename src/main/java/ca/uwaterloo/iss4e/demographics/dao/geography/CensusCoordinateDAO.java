@@ -7,14 +7,14 @@ import javax.sql.DataSource;
 
 import org.springframework.jdbc.core.JdbcTemplate;
 
-import ca.uwaterloo.iss4e.demographics.dao.geography.mapper.CoordinateMapper;
+import ca.uwaterloo.iss4e.demographics.dao.geography.mapper.CensusCoordinateMapper;
 import ca.uwaterloo.iss4e.demographics.model.geography.CensusCoordinate;
 import ca.uwaterloo.iss4e.demographics.util.CensusSchemaUtil;
 
-public class CoordinateDAO {
+public class CensusCoordinateDAO {
 	private DataSource dataSource;
 
-	public CoordinateDAO(DataSource dataSouce) {
+	public CensusCoordinateDAO(DataSource dataSouce) {
 		this.dataSource = dataSouce;
 	}
 
@@ -112,7 +112,7 @@ public class CoordinateDAO {
 
 		JdbcTemplate template = new JdbcTemplate(dataSource);
 		List<CensusCoordinate> censusCoordinates = template.query(sql,
-				new Object[] { polygonPatchId }, new CoordinateMapper());
+				new Object[] { polygonPatchId }, new CensusCoordinateMapper());
 
 		return censusCoordinates;
 

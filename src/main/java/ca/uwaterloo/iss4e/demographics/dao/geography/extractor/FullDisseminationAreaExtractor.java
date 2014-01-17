@@ -8,9 +8,9 @@ import java.util.HashMap;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.ResultSetExtractor;
 
-import ca.uwaterloo.iss4e.demographics.dao.geography.mapper.CoordinateMapper;
+import ca.uwaterloo.iss4e.demographics.dao.geography.mapper.CensusCoordinateMapper;
 import ca.uwaterloo.iss4e.demographics.dao.geography.mapper.DisseminationAreaMapper;
-import ca.uwaterloo.iss4e.demographics.dao.geography.mapper.PolygonPatchMapper;
+import ca.uwaterloo.iss4e.demographics.dao.geography.mapper.CensusPolygonMapper;
 import ca.uwaterloo.iss4e.demographics.model.geography.CensusCoordinate;
 import ca.uwaterloo.iss4e.demographics.model.geography.CensusPolygon;
 import ca.uwaterloo.iss4e.demographics.model.geography.DisseminationArea;
@@ -34,18 +34,18 @@ public class FullDisseminationAreaExtractor implements
 				daMap.put(da.getDaId(), da);
 			}
 
-			PolygonPatchMapper ppm = new PolygonPatchMapper();
-			CensusPolygon cPoly = ppm.mapRow(rs, rs.getRow());
+			CensusPolygonMapper censusPolygonMapper = new CensusPolygonMapper();
+			CensusPolygon cPoly = censusPolygonMapper.mapRow(rs, rs.getRow());
 			if (cPolyId != cPoly.getPolygonPatchId()) {
 				cPolyId = cPoly.getPolygonPatchId();
 				daMap.get(da.getDaId()).addPolygon(cPoly);
 			}
 
-			CoordinateMapper cm = new CoordinateMapper();
+			CensusCoordinateMapper cm = new CensusCoordinateMapper();
 			CensusCoordinate cCoord = cm.mapRow(rs, rs.getRow());
 			DisseminationArea tempDA = daMap.get(da.getDaId());
-			int cpIndex = tempDA.getPolygonPatches().size() - 1;
-			tempDA.getPolygonPatches().get(cpIndex).addCoordinate(cCoord);
+			int cpIndex = tempDA.getCensusPolygons().size() - 1;
+			tempDA.getCensusPolygons().get(cpIndex).addCoordinate(cCoord);
 		}
 
 		return daMap.values();

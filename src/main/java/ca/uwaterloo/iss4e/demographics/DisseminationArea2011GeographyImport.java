@@ -13,25 +13,25 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.xml.sax.SAXException;
 
-import ca.uwaterloo.iss4e.demographics.dao.geography.CoordinateDAO;
-import ca.uwaterloo.iss4e.demographics.dao.geography.ForwardSortationAreaDAO;
-import ca.uwaterloo.iss4e.demographics.dao.geography.PolygonPatchDAO;
+import ca.uwaterloo.iss4e.demographics.dao.geography.CensusCoordinateDAO;
+import ca.uwaterloo.iss4e.demographics.dao.geography.DisseminationAreaDAO;
+import ca.uwaterloo.iss4e.demographics.dao.geography.CensusPolygonDAO;
 import ca.uwaterloo.iss4e.demographics.model.geography.CensusPolygon;
-import ca.uwaterloo.iss4e.demographics.model.geography.ForwardSortationArea;
-import ca.uwaterloo.iss4e.demographics.sax.FsaGmlHandler;
+import ca.uwaterloo.iss4e.demographics.model.geography.DisseminationArea;
+import ca.uwaterloo.iss4e.demographics.sax.Da2011GmlHandler;
 
-public class ForwardSortationAreaGeographyImport {
+public class DisseminationArea2011GeographyImport {
 	private static final ApplicationContext context = new ClassPathXmlApplicationContext(
 			"applicationContext.xml");
-	private static final PolygonPatchDAO polygonPatchDAO = (PolygonPatchDAO) context
-			.getBean("polygonPatchDAO");
-	private static final ForwardSortationAreaDAO forwardSortationAreaDAO = (ForwardSortationAreaDAO) context
-			.getBean("forwardSortationAreaDAO");
-	private static final CoordinateDAO coordinateDAO = (CoordinateDAO) context
-			.getBean("coordinateDAO");
+	private static final CensusPolygonDAO censusPolygonDAO = (CensusPolygonDAO) context
+			.getBean("censusPolygonDAO");
+	private static final DisseminationAreaDAO disseminationAreaDAO = (DisseminationAreaDAO) context
+			.getBean("disseminationAreaDAO");
+	private static final CensusCoordinateDAO censusCoordinateDAO = (CensusCoordinateDAO) context
+			.getBean("censusCoordinateDAO");
 
 	public static void main(String[] args) {
-		String file = "gfsa000b11g_e.gml";
+		String file = "gda_000b11g_e.gml";
 		FileInputStream fis = null;
 		try {
 			fis = new FileInputStream(file);
@@ -45,25 +45,24 @@ public class ForwardSortationAreaGeographyImport {
 		SAXParserFactory factory = SAXParserFactory.newInstance();
 		try {
 			SAXParser saxParser = factory.newSAXParser();
-			FsaGmlHandler fsaGmlHandler = new FsaGmlHandler();
-			saxParser.parse(fis, fsaGmlHandler);
-			HashSet<ForwardSortationArea> fsas = fsaGmlHandler.getFsas();
+			Da2011GmlHandler da2011GmlHandler = new Da2011GmlHandler();
+			saxParser.parse(fis, da2011GmlHandler);
+			HashSet<DisseminationArea> das = da2011GmlHandler.getDas();
 
-			// Insert each FSA into the database
-			for (ForwardSortationArea fsa : fsas) {
-				System.out.println("Inserting FSA: " + fsa.getFsaCode());
-				forwardSortationAreaDAO.insertForwardSortationArea(fsa);
+			// Insert each DA into the database
+			for (DisseminationArea da : das) {
+				System.out.println("Inserting DA: " + da.getDaId());
+				disseminationAreaDAO.insertDisseminationArea(da);
 
-				// Each FSA may be comprised of multiple PolygonPatches
-				for (CensusPolygon censusPolygon : fsa.getPolygonPatches()) {
-					int polygonPatchId = polygonPatchDAO.insertPolygonPatch(fsa
-							.getFsaCode());
+				// Each DA may be comprised of multiple CensusPolygons
+				for (CensusPolygon censusPolygon : da.getCensusPolygons()) {
+					int polygonPatchId = censusPolygonDAO.insertCensusPolygon(da.getDaId());
 					censusPolygon.setPolygonPatchId(polygonPatchId);
 					System.out.println("  - Polygon Patch Inserted: "
 							+ censusPolygon.getPolygonPatchId());
 
 					// Each CensusPolygon is comprised of many Coordinates
-					coordinateDAO.insertCoordinatesForFSA(
+					censusCoordinateDAO.insertCoordinatesForDA(
 							censusPolygon.getCoordinates(),
 							censusPolygon.getPolygonPatchId());
 				}

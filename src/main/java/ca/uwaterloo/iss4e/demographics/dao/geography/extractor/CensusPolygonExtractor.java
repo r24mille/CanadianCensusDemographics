@@ -5,15 +5,15 @@ import java.sql.SQLException;
 
 import org.springframework.data.jdbc.core.OneToManyResultSetExtractor;
 
-import ca.uwaterloo.iss4e.demographics.dao.geography.mapper.CoordinateMapper;
-import ca.uwaterloo.iss4e.demographics.dao.geography.mapper.PolygonPatchMapper;
+import ca.uwaterloo.iss4e.demographics.dao.geography.mapper.CensusCoordinateMapper;
+import ca.uwaterloo.iss4e.demographics.dao.geography.mapper.CensusPolygonMapper;
 import ca.uwaterloo.iss4e.demographics.model.geography.CensusCoordinate;
 import ca.uwaterloo.iss4e.demographics.model.geography.CensusPolygon;
 
-public class PolygonPatchExtractor extends
+public class CensusPolygonExtractor extends
 		OneToManyResultSetExtractor<CensusPolygon, CensusCoordinate, Integer> {
-	public PolygonPatchExtractor() {
-		super(new PolygonPatchMapper(), new CoordinateMapper());
+	public CensusPolygonExtractor() {
+		super(new CensusPolygonMapper(), new CensusCoordinateMapper());
 	}
 
 	@Override
