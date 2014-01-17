@@ -101,9 +101,9 @@ public class Da2006GmlHandler extends DefaultHandler {
 
 			int j = 0;
 			while (j + 1 < digits.length) {
-				double latitude = digits[j];
-				j = j + 1;
 				double longitude = digits[j];
+				j = j + 1;
+				double latitude = digits[j];
 				j = j + 1;
 
 				/*
