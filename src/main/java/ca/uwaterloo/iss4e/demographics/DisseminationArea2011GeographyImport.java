@@ -63,7 +63,7 @@ public class DisseminationArea2011GeographyImport {
 
 					// Each CensusPolygon is comprised of many Coordinates
 					censusCoordinateDAO.insertCoordinatesForDA(
-							censusPolygon.getCoordinates(),
+							censusPolygon.getCensusCoordinates(),
 							censusPolygon.getPolygonPatchId());
 				}
 			}

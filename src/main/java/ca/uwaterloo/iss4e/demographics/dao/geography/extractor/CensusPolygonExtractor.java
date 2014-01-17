@@ -32,6 +32,6 @@ public class CensusPolygonExtractor extends
 
 	@Override
 	protected void addChild(CensusPolygon root, CensusCoordinate child) {
-		root.addCoordinate(child);
+		root.addCensusCoordinate(child);
 	}
 }

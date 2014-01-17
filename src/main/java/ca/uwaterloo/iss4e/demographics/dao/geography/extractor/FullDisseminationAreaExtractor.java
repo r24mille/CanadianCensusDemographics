@@ -45,7 +45,7 @@ public class FullDisseminationAreaExtractor implements
 			CensusCoordinate cCoord = cm.mapRow(rs, rs.getRow());
 			DisseminationArea tempDA = daMap.get(da.getDaId());
 			int cpIndex = tempDA.getCensusPolygons().size() - 1;
-			tempDA.getCensusPolygons().get(cpIndex).addCoordinate(cCoord);
+			tempDA.getCensusPolygons().get(cpIndex).addCensusCoordinate(cCoord);
 		}
 
 		return daMap.values();

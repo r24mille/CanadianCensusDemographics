@@ -38,7 +38,7 @@ public class BuildKML {
 		List<Coordinate> interiorCoordinates = new ArrayList<Coordinate>();
 
 		for (ca.uwaterloo.iss4e.demographics.model.geography.CensusCoordinate gmlCoord : censusPolygon
-				.getCoordinates()) {
+				.getCensusCoordinates()) {
 			Coordinate kmlCoord = new Coordinate(gmlCoord.getLongitude(),
 					gmlCoord.getLatitude());
 			

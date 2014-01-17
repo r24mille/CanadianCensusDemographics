@@ -55,15 +55,15 @@ public class DisseminationArea2006GeographyImport {
 
 				// Each DA may be comprised of multiple CensusPolygons
 				for (CensusPolygon censusPolygon : da.getCensusPolygons()) {
-					// int polygonPatchId = censusPolygonDAO.insertCensusPolygon(da.getDaId());
-					// censusPolygon.setPolygonPatchId(polygonPatchId);
+					 int polygonPatchId = censusPolygonDAO.insertCensusPolygon(da.getDaId());
+					 censusPolygon.setPolygonPatchId(polygonPatchId);
 					System.out.println("  - Polygon Patch Inserted: "
 							+ censusPolygon.getPolygonPatchId());
 
 					// Each CensusPolygon is comprised of many Coordinates
-					//censusCoordinateDAO.insertCoordinatesForDA(
-					//		censusPolygon.getCoordinates(),
-					//		censusPolygon.getPolygonPatchId());
+					censusCoordinateDAO.insertCoordinatesForDA(
+							censusPolygon.getCensusCoordinates(),
+							censusPolygon.getPolygonPatchId());
 				}
 			}
 		} catch (ParserConfigurationException e) {

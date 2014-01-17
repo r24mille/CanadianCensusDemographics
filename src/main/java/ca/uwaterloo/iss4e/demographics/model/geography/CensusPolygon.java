@@ -95,7 +95,7 @@ public class CensusPolygon {
 		return geomFactory.createLinearRing(coordinates);
 	}
 
-	public void addCoordinate(CensusCoordinate censusCoordinate) {
+	public void addCensusCoordinate(CensusCoordinate censusCoordinate) {
 		this.censusCoordinates.add(censusCoordinate);
 	}
 
@@ -107,11 +107,11 @@ public class CensusPolygon {
 		this.polygonPatchId = polygonPatchId;
 	}
 
-	public List<CensusCoordinate> getCoordinates() {
+	public List<CensusCoordinate> getCensusCoordinates() {
 		return censusCoordinates;
 	}
 
-	public void setCoordinates(List<CensusCoordinate> censusCoordinates) {
+	public void setCensusCoordinates(List<CensusCoordinate> censusCoordinates) {
 		this.censusCoordinates = censusCoordinates;
 	}
 }

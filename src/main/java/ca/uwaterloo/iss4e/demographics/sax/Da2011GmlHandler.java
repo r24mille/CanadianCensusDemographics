@@ -123,7 +123,7 @@ public class Da2011GmlHandler extends DefaultHandler {
 				 */
 				CensusCoordinate censusCoordinate = new CensusCoordinate(longitude, latitude);
 				censusCoordinate.setPathType(pathType);
-				censusPolygon.addCoordinate(censusCoordinate);
+				censusPolygon.addCensusCoordinate(censusCoordinate);
 			}
 
 			digits = null;

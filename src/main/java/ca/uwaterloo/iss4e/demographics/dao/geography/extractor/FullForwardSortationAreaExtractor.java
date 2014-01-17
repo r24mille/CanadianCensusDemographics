@@ -45,7 +45,7 @@ public class FullForwardSortationAreaExtractor implements
 			CensusCoordinate cCoord = cm.mapRow(rs, rs.getRow());
 			ForwardSortationArea tempFSA = fsaMap.get(fsa.getFsaCode());
 			int cpIndex = tempFSA.getCensusPolygons().size() - 1;
-			tempFSA.getCensusPolygons().get(cpIndex).addCoordinate(cCoord);
+			tempFSA.getCensusPolygons().get(cpIndex).addCensusCoordinate(cCoord);
 		}
 
 		return fsaMap.values();

@@ -64,7 +64,7 @@ public class ForwardSortationArea2011GeographyImport {
 
 					// Each CensusPolygon is comprised of many Coordinates
 					censusCoordinateDAO.insertCoordinatesForFSA(
-							censusPolygon.getCoordinates(),
+							censusPolygon.getCensusCoordinates(),
 							censusPolygon.getPolygonPatchId());
 				}
 			}
