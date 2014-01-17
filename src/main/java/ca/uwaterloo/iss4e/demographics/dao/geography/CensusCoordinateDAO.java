@@ -1,6 +1,5 @@
 package ca.uwaterloo.iss4e.demographics.dao.geography;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.sql.DataSource;
@@ -23,7 +22,7 @@ public class CensusCoordinateDAO {
 		String schema = CensusSchemaUtil.getSchemaFromPk(0); // Hackish
 
 		int i = 0;
-		while (i <= censusCoordinates.size()) {
+		while (i < censusCoordinates.size()) {
 			// Set an endpoint to maximize the subList length at 2000 elements
 			int end = i + 2000;
 			if (end > censusCoordinates.size()) {
@@ -45,7 +44,7 @@ public class CensusCoordinateDAO {
 		String schema = CensusSchemaUtil.getSchemaFromPk("fsa_code"); // Hackish
 
 		int i = 0;
-		while (i <= censusCoordinates.size()) {
+		while (i < censusCoordinates.size()) {
 			// Set an endpoint to maximize the subList length at 2000 elements
 			int end = i + 2000;
 			if (end > censusCoordinates.size()) {
@@ -76,20 +75,18 @@ public class CensusCoordinateDAO {
 			}
 		}
 
-		ArrayList<Object> argsList = new ArrayList<Object>();
-		int j = 1;
+		Object[] args = new Object[(censusCoordinates.size() * 4)];
+		int j = 0;
 		for (CensusCoordinate censusCoordinate : censusCoordinates) {
-			argsList.add(j, polygonPatchId);
+			args[j] = polygonPatchId;
 			j = j + 1;
-			argsList.add(j, censusCoordinate.getLatitude());
+			args[j] =  censusCoordinate.getLatitude();
 			j = j + 1;
-			argsList.add(j, censusCoordinate.getLongitude());
+			args[j] =  censusCoordinate.getLongitude();
 			j = j + 1;
-			argsList.add(j, censusCoordinate.getPathType().toString());
+			args[j] =  censusCoordinate.getPathType().toString();
 			j = j + 1;
 		}
-		Object[] args = new Object[argsList.size()];
-		argsList.toArray(args);
 
 		JdbcTemplate template = new JdbcTemplate(dataSource);
 		template.update(sqlBuff.toString(), args);

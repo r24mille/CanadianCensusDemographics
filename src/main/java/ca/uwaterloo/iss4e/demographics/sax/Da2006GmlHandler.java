@@ -18,9 +18,9 @@ public class Da2006GmlHandler extends DefaultHandler {
 	private boolean dauid;
 	private boolean cduid;
 	private boolean pruid;
-	private boolean posList;
+	private boolean coords;
 	private boolean boundingBox;
-	private StringBuffer posBuffer;
+	private StringBuffer coordBuffer;
 	private PathType pathType;
 	private CensusPolygon censusPolygon;
 	private DisseminationArea da;
@@ -63,8 +63,8 @@ public class Da2006GmlHandler extends DefaultHandler {
 		}
 
 		if (qName.equalsIgnoreCase("gml:coordinates") && !boundingBox) {
-			posList = true;
-			posBuffer = new StringBuffer();
+			coords = true;
+			coordBuffer = new StringBuffer();
 		}
 
 	}
@@ -88,12 +88,12 @@ public class Da2006GmlHandler extends DefaultHandler {
 		 */
 		if (qName.equalsIgnoreCase("gml:coordinates") && !boundingBox) {
 			System.out.println("Splitting data: "
-					+ posBuffer.toString().substring(0, 30)
+					+ coordBuffer.toString().substring(0, 30)
 					+ " [...] "
-					+ posBuffer.toString().substring(
-							posBuffer.toString().length() - 30));
+					+ coordBuffer.toString().substring(
+							coordBuffer.toString().length() - 30));
 
-			String[] strings = posBuffer.toString().split("[\\s,]");
+			String[] strings = coordBuffer.toString().split("[\\s,]");
 			digits = new double[strings.length];
 			for (int i = 0; i < strings.length; i++) {
 				digits[i] = Double.parseDouble(strings[i]);
@@ -117,8 +117,8 @@ public class Da2006GmlHandler extends DefaultHandler {
 			}
 
 			digits = null;
-			posList = false;
-			posBuffer = null;
+			coords = false;
+			coordBuffer = null;
 		}
 
 		if (qName.equalsIgnoreCase("gml:polygonMember")) {
@@ -149,8 +149,8 @@ public class Da2006GmlHandler extends DefaultHandler {
 		} else if (pruid) {
 			int provinceId = Integer.parseInt(new String(ch, start, length));
 			da.setProvinceId(provinceId);
-		} else if (posList) {
-			posBuffer.append(new String(ch, start, length));
+		} else if (coords) {
+			coordBuffer.append(new String(ch, start, length));
 		}
 
 	}

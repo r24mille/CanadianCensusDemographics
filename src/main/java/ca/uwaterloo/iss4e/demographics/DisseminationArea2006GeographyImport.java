@@ -14,8 +14,8 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.xml.sax.SAXException;
 
 import ca.uwaterloo.iss4e.demographics.dao.geography.CensusCoordinateDAO;
-import ca.uwaterloo.iss4e.demographics.dao.geography.DisseminationAreaDAO;
 import ca.uwaterloo.iss4e.demographics.dao.geography.CensusPolygonDAO;
+import ca.uwaterloo.iss4e.demographics.dao.geography.DisseminationAreaDAO;
 import ca.uwaterloo.iss4e.demographics.model.geography.CensusPolygon;
 import ca.uwaterloo.iss4e.demographics.model.geography.DisseminationArea;
 import ca.uwaterloo.iss4e.demographics.sax.Da2006GmlHandler;
@@ -42,6 +42,8 @@ public class DisseminationArea2006GeographyImport {
 	}
 
 	private static void saxParse(FileInputStream fis) {
+		HashSet<Integer> existingDaIds = disseminationAreaDAO.getDaIds();
+		
 		SAXParserFactory factory = SAXParserFactory.newInstance();
 		try {
 			SAXParser saxParser = factory.newSAXParser();
@@ -53,12 +55,22 @@ public class DisseminationArea2006GeographyImport {
 			for (DisseminationArea da : das) {
 				System.out.println("Current DA: " + da.getDaId());
 
+				// Some DAs from the GML file don't hadn't been inserted by prior
+				// census profile imports. Add them to the database populated with 
+				// what information we can scrape from the GML file.
+				if (!existingDaIds.contains(da.getDaId())) {
+					System.out.println("DA# " + da.getDaId() + " does not currently exist. Inserting...");
+					disseminationAreaDAO.insertDisseminationArea(da);
+				}
+				
 				// Each DA may be comprised of multiple CensusPolygons
 				for (CensusPolygon censusPolygon : da.getCensusPolygons()) {
-					 int polygonPatchId = censusPolygonDAO.insertCensusPolygon(da.getDaId());
-					 censusPolygon.setPolygonPatchId(polygonPatchId);
+					int polygonPatchId = censusPolygonDAO
+							.insertCensusPolygon(da.getDaId());
+					censusPolygon.setPolygonPatchId(polygonPatchId);
 					System.out.println("  - Polygon Patch Inserted: "
 							+ censusPolygon.getPolygonPatchId());
+					System.out.println("  - CensusCoordinate list size: " + censusPolygon.getCensusCoordinates().size());
 
 					// Each CensusPolygon is comprised of many Coordinates
 					censusCoordinateDAO.insertCoordinatesForDA(
